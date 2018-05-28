@@ -22,7 +22,7 @@ public class Customer extends AbstractDomainClass {
     @Embedded
     private Address shippingAddress;
 
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private User user;
 
     @Override
