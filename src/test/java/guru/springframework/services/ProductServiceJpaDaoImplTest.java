@@ -9,9 +9,6 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -31,48 +28,10 @@ public class ProductServiceJpaDaoImplTest {
 
     @Test
     public void testListMethod() throws Exception {
+
         List<Product> products = (List<Product>) productService.listAll();
-        assert products.size() > 0;
-    }
 
-    @Test
-    public void testGetMethod() throws Exception {
-        Product product = (Product) productService.getById(2);
-        assert product.getDescription() == "Product 2";
-    }
+        assert products.size() == 5;
 
-    @Test
-    public void testSaveMethod() throws Exception {
-        Product savedProduct = productService.saveOrUpdate(createProduct());
-        Product product = productService.getById(savedProduct.getId());
-
-        assert savedProduct.getDescription().equals(product.getDescription());
-    }
-
-    @Test
-    public void testUpdateMethod() throws Exception {
-        Product product = productService.saveOrUpdate(createProduct());
-
-        product.setDescription("Updated Product");
-        Product savedProduct = productService.saveOrUpdate(product);
-        assert savedProduct.getDescription().equals(product.getDescription());
-    }
-
-    @Test
-    public void testDeleteMethod() throws Exception {
-        Product product = productService.saveOrUpdate(createProduct());
-        productService.delete(product.getId());
-
-        Product product1 = productService.getById(product.getId());
-        assert product1 == null;
-    }
-
-    private Product createProduct() {
-        Product product = new Product();
-        product.setDescription("Product 6");
-        product.setPrice(new BigDecimal("12.34"));
-        product.setImageUrl("http://example.com/product");
-
-        return product;
     }
 }
