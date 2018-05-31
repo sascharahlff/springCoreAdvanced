@@ -61,5 +61,8 @@ public class SpringSecConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers("/customer/**").authenticated()
                 .and().authorizeRequests().antMatchers("/user/**").hasAnyAuthority("ADMIN")
                 .and().exceptionHandling().accessDeniedPage("/access_denied");
+
+        // BUGFIX: Blank site after H2 login
+        http.headers().frameOptions().disable();
     }
 }
